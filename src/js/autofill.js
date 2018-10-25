@@ -3,6 +3,7 @@ let namesAndStore = [];
 let fullData = [];
 const showList = document.getElementById('placeList');
 const showProductPlace = document.getElementById('productResultPlace');
+const showML = document.getElementById('productResultPlaceML');
 
 const getData = () => {
   const settings = {/* your settings... */ timestampsInSnapshots: true };
@@ -26,8 +27,9 @@ const getData = () => {
 
             // console.log('tiene' + element.name);
             let id = element.name.replace(/ /g, "");
-            showList.innerHTML += `<p>${element.name}</p>
-            <button id=${id} onclick="showProduct(this.id)">comparar</button>`
+            showList.innerHTML += `
+            <li class="list-group-item">${element.name}<button class="float-right btn verde" id=${id} onclick="showProduct(this.id)">Comparar</button></li>
+           `
             // result.push(nombres)
           } else { // console.log('nothing');
           }
@@ -78,13 +80,34 @@ const showProduct = (id) => {
       return element;
     }
   });
-  console.log(match);
+  // console.log(match);
   compareAndAddMatch(match.nombre);
-  Porcent(match.nombre);
+  showProductML(id, match);
   showProductPlace.innerHTML = `
-    <img src="${match.url}">
-    <p>Nombre ${match.nombre}</p>
-    <p>Tienda ${match.seller}</p>
-    <p>Precio ${match.precioFalabella}</p>
+    <div class="col-md-1 col-4">
+      <img src="./img/icon_falabella.png" class=" rounded-circle" height="40px">
+    </div>
+    <div class="col-md-2 col-4">
+      <img class=" align-middle" src="${match.url}">
+   </div>
+  <div class="col-md-6">${match.nombre}/${match.seller}</div>
+
+  <div class="col-md-3">$${match.precioFalabella}</div>
   `;
+};
+
+const showProductML = (id, match) => {
+  console.log(match);
+  
+  showML.innerHTML = `
+    <div class="col-md-1 col-4">
+    <img src="./img/mercado libre.png" class=" rounded-circle" height="40px">
+  </div>
+  <div class="col-md-2 col-4">
+    <img class=" align-middle" src="${match.url}">
+  </div>
+  <div class="col-md-6">${match.nombre}/${match.seller}</div>
+
+  <div class="col-md-3">$399990</div>
+  `
 };

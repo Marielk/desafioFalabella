@@ -2,6 +2,7 @@
 let sellersOnly = [];
 let fullDataSellers = [];
 let fullDataSellers2 = [];
+let newSellerList = [];
 
 const dataExtractor = (jsonFile) => {
   return new Promise((resolve, reject) => {
@@ -29,8 +30,11 @@ window.onload = () => {
       sellersOnly.push({
         "Seller": element.Tienda
       })
+      // let newArr = element;
+      // let output = eliminateDuplicates(newArr);
+      // newSellerList.push(output);
     })  
-    // console.log(sellersOnly);
+    //  console.log(newSellerList);
     printSellers();
   })
 }
@@ -62,7 +66,7 @@ const findSellerMatches = (id) => {
         <button id=${buttonID} onclick="showProduct2(this.id)">Comparar</button>`
         return element;
       } else {
-        console.log('no match');  
+        // console.log('no match');  
       }
     })
   };
@@ -78,7 +82,8 @@ const findSellerMatches = (id) => {
         return element;
       }
     });
-    console.log(match);
+    // console.log(match);
+    compareAndAddMatch(match.Producto)
     showProductPlace.innerHTML = `
       <img src="${match.Thumbnail}">
       <p>Nombre ${match.Producto}</p>
@@ -87,3 +92,17 @@ const findSellerMatches = (id) => {
     `;
   };
 
+  function eliminateDuplicates(arr) {
+    var i,
+        len=arr.length,
+        out=[],
+        obj={};
+   
+    for (i=0;i<len;i++) {
+       obj[arr[i]]=0;
+    }
+    for (i in obj) {
+       out.push(i);
+    }
+    return out;
+   }

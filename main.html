@@ -228,9 +228,9 @@
                   <i class="fas fa-bars blanco-txt"></i>
                 </button>
           </div>
-          <input type="text" class="form-control busqueda" placeholder="Producto o Seller" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <input type="text" class="form-control busqueda" placeholder="Producto o Seller" aria-label="Recipient's username" aria-describedby="button-addon2" id="searchInput">
           <div class="input-group-append">
-            <button class="basenav btn " type="button" id="button-addon2">Button</button>
+            <button class="basenav btn " type="button" id="button-addon2"  onclick="getData()">Button</button>
           </div>
         </div>
     </div>
@@ -245,12 +245,12 @@
               </div>
             </div>
 
-          <ul class="list-group">
-              <li class="list-group-item">iPhone X <button class="float-right btn verde">Comparar</button></li>
-              <li class="list-group-item">iPhone 4 <button class="float-right btn verde">Comparar</button></li>
+          <ul class="list-group" id="placeList">
+              <!-- <li class="list-group-item">iPhone X <button class="float-right btn verde">Comparar</button></li> -->
+              <!-- <li class="list-group-item">iPhone 4 <button class="float-right btn verde">Comparar</button></li>
               <li class="list-group-item">iPhone 5<button class="float-right btn verde">Comparar</button></li>
               <li class="list-group-item">iPhpne 8 plus<button class="float-right btn verde">Comparar</button></li>
-              <li class="list-group-item">iPhone 5 SE<button class="float-right btn verde">Comparar</button></li>
+              <li class="list-group-item">iPhone 5 SE<button class="float-right btn verde">Comparar</button></li> -->
             </ul>
     
       </div>
@@ -298,8 +298,8 @@
                           </div>
                       </div>
 
-                      <div class="row cuadrito centrado">
-                          <div class="col-md-1 col-4">
+                      <div class="row cuadrito centrado" id="productResultPlace">
+                          <!-- <div class="col-md-1 col-4">
                               <img src="./img/icon_falabella.png" class=" rounded-circle" height="40px">
                           </div>
                           <div class="col-md-2 col-4">
@@ -307,14 +307,14 @@
                           </div>
                           <div class="col-md-6">Samsung Galaxy S7 Edge Duos / Iprotech </div>
                           
-                          <div class="col-md-3">$399990</div>
+                          <div class="col-md-3">$399990</div> -->
                       </div>
 
                       </div>
                
               
-                      <div class="row cuadrito centrado">
-                          <div class="col-md-1 col-4">
+                      <div class="row cuadrito centrado" id="productResultPlaceML">
+                          <!-- <div class="col-md-1 col-4">
                               <img src="./img/mercado libre.png" class=" rounded-circle" height="40px">
                           </div>
                           <div class="col-md-2 col-4">
@@ -322,7 +322,7 @@
                           </div>
                           <div class="col-md-6">Samsung Galaxy S7 Edge Duos / Iprotech </div>
                           
-                          <div class="col-md-3">$399990</div>
+                          <div class="col-md-3">$399990</div> -->
                       </div>
 
                       <div class="row encabezados">
@@ -463,7 +463,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script>
 <!--fin js bootstrap-->
-      
+
+<!--Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDbmEw8LQkXQIEE9aEhEaT8-lFVXvLvNfg",
+      authDomain: "falabellatf.firebaseapp.com",
+      databaseURL: "https://falabellatf.firebaseio.com",
+      projectId: "falabellatf",
+      storageBucket: "falabellatf.appspot.com",
+      messagingSenderId: "781775456861"
+    };
+    firebase.initializeApp(config);
+  </script>
+<script src="src/js/addProduct.js"></script>
+<script src="src/js/autofill.js"></script>
+<!-- <script src="src/js/getSellers.js"></script>  -->
+<script src="src/js/matchProduct.js"></script>    
         </body>
       
         </html>
