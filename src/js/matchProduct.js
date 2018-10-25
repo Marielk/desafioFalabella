@@ -104,6 +104,7 @@ getProductmatch = (producto, resultados) => {
 
 // función controladora de lectura de producto ingresado y que lo escribe en firebase
 const compareAndAddMatch = (id) => {
+  Porcent(id);
 
   let producto = id;
   let idProd = id.replace(/\//g, '');
@@ -133,46 +134,48 @@ const compareAndAddMatch = (id) => {
 };
 
 
-// const Porcent = (nombre) => {
-//   let idProd = nombre.replace(/\//g, '');
+// función para agregar porcentaje de cada precio
+const Porcent = (nombre) => {
 
+  let idProd = nombre.replace(/\//g, '');
 
-//   const firestore = firebase.firestore();
-//   const settings = {
-//     timestampsInSnapshots: true
-//   };
-//   firestore.settings(settings);
+  const firestore = firebase.firestore();
+  const settings = {
+    timestampsInSnapshots: true
+  };
+  firestore.settings(settings);
 
-//   var docRef = firestore.collection("products").doc(idProd);
-//   docRef.get().then(function (doc) {
-//     if (doc.exists) {
-//       let PML = doc.data().precioML;
-//       let PF = doc.data().valorOrigen
-//       let PorcentF = (PML / PF);
-//       let PorcentML = (PF / PML);
+  var docRef = firestore.collection("products").doc(idProd);
 
-//       // if (PML > PF) {
-//       //   Porcent = {
-//       //     "porcentF": (PF / PML),
-//       //     "porcentML": 1
-//       //   }
-//       // }
-//       // if (PML <= PF) {
-//       //   Porcent = {
-//       //     "porcentF": 1,
-//       //     "porcentML": (PML / PF)
-//       //   }
-//       // }
+  docRef.get().then(function (doc) {
 
-//       console.log(Porcent1, Porcent2);
+    if (doc.exists) {
 
+      let PML = doc.data().precioML;
+      let PF = doc.data().valorOrigen
+      let PorcentF = (PML / PF);
+      let PorcentML = (PF / PML);
 
-//     } else {
-//       // doc.data() will be undefined in this case
-//       console.log("No such document!");
-//     }
-//   }).catch(function (error) {
-//     console.log("Error getting document:", error);
-//   });
+      if (PorcentF > 1) {
+        PorcentF = 1
+      };
 
-// }
+      if (PorcentML > 1) {
+        PorcentML = 1
+      };
+
+      let dataPorcent = {
+        "PorFal": PorcentF,
+        "PorML": PorcentML
+      };
+
+      firestore.collection("products").doc(idProd).update(dataPorcent);
+
+    } else {
+      console.log("No such document!");
+    };
+
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
+};
