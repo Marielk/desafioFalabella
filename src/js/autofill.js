@@ -65,8 +65,9 @@ const showML = document.getElementById('productResultPlaceML');
 
             // console.log('tiene' + element.name);
             let id = element.name.replace(/ /g, "");
+            let idProd = id.replace(/\//g, '')
             showList.innerHTML += `
-            <li class="list-group-item">${element.name}<button class="float-right btn verde" id=${id} onclick="showProduct(this.id)">Comparar</button></li>
+            <li class="list-group-item">${element.name}<button class="float-right btn verde" id=${idProd} onclick="showProduct(this.id)">Comparar</button></li>
            `;
           }
           })
@@ -106,7 +107,7 @@ const showProduct = (id) => {
   //console.log(id);
   // console.log(fullData);
   let match = fullData.find((element) => {
-    if (element.nombre.replace(/ /g, "") === id) {
+    if (element.nombre.replace(/ /g, "").replace(/\//g, '') === id) {
       return element;
     }
   });
@@ -127,32 +128,13 @@ const showProduct = (id) => {
 };
 
 const showProductML = (id, match) => {
-  const settings = {/* your settings... */ timestampsInSnapshots: true };
-  firestore.settings(settings);
-  firestore.collection("products")
-  .get()
-  .then(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-      newDataML.push({
-        "nombre": doc.data().producto,
-        "url": doc.data().image,
-        "seller": doc.data().tienda,
-        "precioFalabella": doc.data().valorOrigen,
-        "precioML": doc.data().precioML,
-        "sellerNick": doc.data().seller
-      });
-    })
-    
-  }).catch(function (error) {
-      console.log("Error getting documents: ", error);
-    });
     // console.log(newDataML);
-      let match2 = newDataML.find((element) => {
-        if (element.nombre.replace(/ /g, "") === id) {
-          console.log(element);
-          return element;
-        }  
-        
+      // let match2 = newDataML.find((element) => {
+      //   if (element.nombre.replace(/ /g, "") === id) {
+      //     console.log(element);
+      //     return element;
+      //   }  
+      getOnlyProduct(id);  
       showML.innerHTML = `
         <div class="col-md-1 col-4">
         <img src="./img/mercado libre.png" class=" rounded-circle" height="40px">
@@ -164,7 +146,41 @@ const showProductML = (id, match) => {
 
       <div class="col-md-3">$${match2.precioML}</div>
       `
-        })
+        
 
   
 }
+
+const getOnlyProduct = (id) => {
+  var docRef = firestore.collection("products").doc(id);
+  docRef.get().then(function(doc) {
+      if (doc.exists) {
+          console.log("Document data:", doc.data());
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch(function(error) {
+      console.log("Error getting document:", error);
+  });
+}
+
+// const settings = {/* your settings... */ timestampsInSnapshots: true };
+//   firestore.settings(settings);
+//   firestore.collection("products")
+//   .get()
+//   .then(function (querySnapshot) {
+//     querySnapshot.forEach(function (doc) {
+//       newDataML.push({
+//         "nombre": doc.data().producto,
+//         "url": doc.data().image,
+//         "seller": doc.data().tienda,
+//         "precioFalabella": doc.data().valorOrigen,
+//         "precioML": doc.data().precioML,
+//         "sellerNick": doc.data().seller
+//       });
+//     })
+    
+//   }).catch(function (error) {
+//       console.log("Error getting documents: ", error);
+//     });

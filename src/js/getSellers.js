@@ -46,8 +46,9 @@ const printSellers = () => {
     sellersOnly.forEach(seller => {
       // let id = seller.Seller; 
       // console.log(id);
-      sellerList.innerHTML += `<p>${seller.Seller}</p>
-      <button id=${seller.Seller} onclick="findSellerMatches(this.id)">Ver Productos</button>`
+      sellerList.innerHTML += `
+      <li class="list-group-item">${seller.Seller}<button class="float-right" id=${seller.Seller} onclick="findSellerMatches(this.id)">Comparar</button></li>
+      `
     })
   }
 }
@@ -62,8 +63,9 @@ const findSellerMatches = (id) => {
         // console.log(element.Producto);
         let buttonID = element.Producto.replace(/ /g, "");
         // let buttonID2 = buttonID.replace(/\//g, '');
-        placeResult.innerHTML += `<p>${element.Producto}</p>
-        <button id=${buttonID} onclick="showProduct2(this.id)">Comparar</button>`
+        placeResult.innerHTML += `
+        <li class="list-group-item">${element.Producto}<button class="float-right btn cyan" id=${buttonID} onclick="showProduct2(this.id)">Ver Producto</button></li>
+       `
         return element;
       } else {
         // console.log('no match');  
