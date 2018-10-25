@@ -39,4 +39,4 @@ const readProduct = () => {
     };
   });
 };
-readProduct();
+// readProduct();

@@ -47,6 +47,10 @@ margin-left:25px;
 
 }
 
+.centrado{
+  text-align: center;
+}
+
 .nav_falabella{
   background-image: url(../../img/fondo_head.png);
   background-repeat: repeat-x;
@@ -55,6 +59,17 @@ margin-left:25px;
 .encabezados{
   margin-top:10px;
 }
+
+#inicio{
+  background-image: url(../../img/apple-devices-artificial-flowers-business-196658.jpg);
+  background-size: cover;
+}
+
+.fondo {
+  background: rgba(41, 41, 51, 0.609); /* Green background with 30% opacity */
+  min-height:100vh;
+}
+
 
 @media (min-width: 320px) and (max-width: 480px) {
   
@@ -88,9 +103,15 @@ margin-left:25px;
 
   .selector{
     top:0px;
+
+    
   
   }
 
+  .fondo {
+    background: rgba(41, 41, 51, 0.609); /* Green background with 30% opacity */
+    min-height:100vh;
+  }
 }
 
 
